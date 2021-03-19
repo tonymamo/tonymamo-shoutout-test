@@ -54,9 +54,7 @@ exports.handler = async function (event, ctx, callback) {
           </div>
         </body>
       </html>
-    `, {
-      waitUntil: 'networkidle',
-    });
+    `);
 
     await page.addScriptTag({
       content: `
