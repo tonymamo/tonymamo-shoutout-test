@@ -71,7 +71,7 @@ exports.handler = async function (event, ctx, callback) {
     return { x, y, width, height };
   });
 
-  await page.waitForLoadState('networkidle');
+  await new Promise((resolve) => setTimeout(resolve, '500'));
   const screenshotBuffer = await page.screenshot({ clip: boundingRect });
   await browser.close();
 
