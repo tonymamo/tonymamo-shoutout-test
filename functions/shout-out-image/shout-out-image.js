@@ -20,44 +20,44 @@ exports.handler = async function (event, ctx, callback) {
     height: 630,
   });
 
-  await page.setContent(`<!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="utf-8" />
-      <link
-        href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,700,800,900&display=swap"
-        rel="stylesheet"
-      />
-      <link rel="preload" href="${
-        userData ? userData.image : ''
-      }" as="image" media="(max-width: 600px)" />
-    </head>
-
-    <body>
-      <div id="app">
-        <div
-          style="
-            display: flex;
-            align-items: center;
-            text-align: center;
-            font-size: 72px;
-            font-weight: 900;
-            line-height: 96px;
-            font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial,
-              sans-serif;
-            width: 1200px;
-            height: 630px;
-            overflow: hidden;
-          "
-        >
-          Thanks for contributing to Storybook!
-        </div>
-      </div>
-    </body>
-  </html>
-  `);
-
   if (userData) {
+    await page.setContent(`<!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8" />
+          <link
+            href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,700,800,900&display=swap"
+            rel="stylesheet"
+          />
+          <link rel="preload" href="${userData.image}" as="image" media="(max-width: 600px)" />
+        </head>
+
+        <body>
+          <div id="app">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                text-align: center;
+                font-size: 72px;
+                font-weight: 900;
+                line-height: 96px;
+                font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial,
+                  sans-serif;
+                width: 1200px;
+                height: 630px;
+                overflow: hidden;
+              "
+            >
+              Thanks for contributing to Storybook!
+            </div>
+          </div>
+        </body>
+      </html>
+    `, {
+      waitUntil: 'networkidle',
+    });
+
     await page.addScriptTag({
       content: `
       window.image = "${userData.image}";
